@@ -42,7 +42,7 @@ button:hover {
     width: 100%;
     display: flex;
     background-color: yellow;
-
+    color: black;
 }
 .header a {
     padding: 10px;
