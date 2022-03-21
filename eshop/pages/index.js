@@ -8,10 +8,17 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Home() {
   const { data, error } = useSWR(`/api/action`, fetcher);
   if (error) {
-    return <p>Error</p>
+    return (
+      <div>
+      {Header()}
+    <p>Error</p></div>)
   }
   if(!data){
-    return <p>načítání</p>
+    return (
+    <div>
+      {Header()}
+    <p>načítání</p>
+    </div>)
   }
   if (data) {
     console.log(data);
@@ -28,7 +35,7 @@ export default function Home() {
           <p>{item.availability}</p>
           <img src={item.imagename}></img>
           <p>Cena: {item.price} </p>
-          {item.description}
+          <div dangerouslySetInnerHTML={{ __html:item.description  }} />   
           </div>
           ))}
         </div>

@@ -1,37 +1,43 @@
 
 import useSWR from "swr"
-import { useEffect } from "react";
 import { useRouter } from 'next/router';
+import Header from "../../components/header"
+
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 
 export default function Product(){
     const addtoCart = (event) =>{
         event.preventDefault();
-        let lc = localStorage.getItem("value");
-        localStorage.setItem("value", lc);
-        }
-
+        let lc = parseInt(localStorage.getItem("product"));
+        alert("Přidáno do košíku");
+    }
     const router = useRouter();
     let product = router.query.product;
     const { data, error } = useSWR(`/api/product/${product}`, fetcher);
-    useEffect(() => {
-      if(!localStorage.getItem("value")){
-        localStorage.setItem("value", "0");
-      }       
-    })
     if (error) {
-        return <p>Error</p>
+        return (
+        <div>
+        {Header()}
+        <p>Error</p>
+        </div>)
     }
     if(!data){
-        return <p>načítání</p>
+        return (
+        <div>
+        {Header()}
+        <p>načítání</p></div>)
     }
 
     if(data) {
         const item = data.data[0];
         let kostatko;
         if(!item){
-            return(<p>Error</p>)
+            return(
+            <div>
+            {Header()}
+            <p>Error</p>
+            </div>)
         }
         else{
             if(item.availability >0) {
@@ -39,6 +45,7 @@ export default function Product(){
                     <form onSubmit={addtoCart}>
                         <input value={data} name="id" type="hidden"></input>
                         <input type="number" name="number" placeholder="Počet" max={item.availability}></input>
+                        <input type="hidden" name="price" max={item.price}></input>
                         <input type="submit"></input>
                     </form>
                 )
@@ -48,8 +55,10 @@ export default function Product(){
                     <p>Není skladem</p>
                 )
             }
-            return(         
-                <div className="product">
+            return(  
+                <div>
+                {Header()}
+                <div  className="product">
                 <h1>{item.name}</h1>
                 <p>Kód produktu: {item.code}</p>
                 <p>Dostupnost: {item.availability}</p>
@@ -57,6 +66,7 @@ export default function Product(){
                 {kostatko}
                 <img src={item.imagename}></img>    
                 <div dangerouslySetInnerHTML={{ __html:item.description  }} />   
+                </div>
                 </div>
             )
         }
