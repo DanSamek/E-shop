@@ -38,6 +38,15 @@ button:hover {
       ". . . ."
       ". . . ."; 
 }
+.header {
+    width: 100%;
+    display: flex;
+    background-color: yellow;
+
+}
+.header a {
+    padding: 10px;
+}
 .pages {
     padding-top: 90px;
 }

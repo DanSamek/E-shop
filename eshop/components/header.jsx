@@ -30,7 +30,7 @@ function Header(){
     return( 
         <div className="header">
          <a href="/"><img src="" alt="" /></a>
-        <a href="/kosik">Košík {amount} ({price} Kč)</a><br/>
+        <a href="/kosik"><img src="/static/kosik.png" width="45px"/> {amount} ({price} Kč)</a><br/>
         {data.map((e)=> {
             return <a href={`/category/${e}`}>{e}{" "}</a>
         })
