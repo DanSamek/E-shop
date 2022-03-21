@@ -1,25 +1,22 @@
 import Header from "../components/header"
 import useSWR from "swr"
+import { useEffect } from "react";
 
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
   const { data, error } = useSWR(`/api/action`, fetcher);
-
-  const addtoCart = () =>{
-
-  }
-
-
-
-
-
+    useEffect(() => {
+      if(!localStorage.getItem("value")){
+        localStorage.setItem("value", "0");
+      }       
+    })
   if (error) {
     return <p>Error</p>
   }
   if(!data){
-    return <p>a</p>
+    return <p>načítání</p>
   }
   if (data) {
     console.log(data);
@@ -35,13 +32,9 @@ export default function Home() {
           <p>{item.code}</p>
           <p>{item.availability}</p>
           <img src={item.imagename}></img>
-          <img src={item.imagename}></img>
           <p>Cena: {item.price} </p>
-          <form onSubmit={addtoCart}>
-             <input type="submit"></input>
-          </form>
+          {item.description}
           </div>
-
           ))}
         </div>
       </div>
