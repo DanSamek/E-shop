@@ -43,6 +43,7 @@ button:hover {
     display: flex;
     background-color: yellow;
     color: black;
+    align-items: center;
 }
 .header a {
     padding: 10px;
