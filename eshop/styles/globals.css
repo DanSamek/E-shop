@@ -31,13 +31,12 @@ button:hover {
 
 .cat {
     display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
-    gap: 100px 100px; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 160px 50px; 
     grid-template-areas: 
-      ". . ."
-      ". . ."
-      ". . ."; 
+      ". . . ."
+      ". . . ."; 
 }
 .pages {
     padding-top: 90px;
