@@ -8,6 +8,8 @@ export default function Category() {
     const router = useRouter();
     const category = router.query.cat_name;
     const [razeni, setRazeni] = useState("price-low-high");
+    const [skladem, setSkladem] = useState(false);
+    const [akcni, setAkcni] = useState(false);
     let prods = [];
     const { data, error } = useSWR(`/api/category/${category}`, fetcher);
     if (data) {
@@ -17,6 +19,12 @@ export default function Category() {
         }
         if (razeni == "price-low-high") {
             prods.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
+        }
+        if (skladem) {
+            prods = prods.filter((e) => e.availability > 0)
+        }
+        if (akcni) {
+            prods = prods.filter((e) => e.action)
         }
     }
     if (error) return <h1>Error</h1>;
@@ -29,6 +37,10 @@ export default function Category() {
             <option value="price-high-low">Cena Sestupně</option>
             <option value="price-low-high">Cena Vzestupně</option>
         </select>
+        <p>Pouze Skladem?</p>
+        <input type="checkbox" value={skladem} onChange={(e) => {setSkladem(e.target.checked)}} />
+        <p>Pouze akční?</p>
+        <input type="checkbox" value={akcni} onChange={(e) => {setAkcni(e.target.checked)}} />
     </div>
 
      <div>
