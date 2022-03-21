@@ -140,9 +140,13 @@ class Matches {
         return this.matches[0];
     }
 }
+
+const client = new Client("./data.json");
+const connPromise = client.connect(); 
 module.exports = {
     Client,
     Db,
-    Collection
+    Collection,
+    connPromise
 }
 
