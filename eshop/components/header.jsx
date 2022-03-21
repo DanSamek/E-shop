@@ -3,18 +3,28 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 function Header(){
-    let [ value, Getvalue ]= useState("");
+    let [ amount, setAmount ] = useState(0);
+    let [ price, setPrice ] = useState(0);
     useEffect(() =>{        
-        if(!localStorage.getItem("products")){
+        let items = localStorage.getItem("products");
+        if(!items){
+            items = "[]";
             localStorage.setItem("products", "[]");
-        }      
-        Getvalue(localStorage.getItem("product"))
-        console.log(value);
+        }
+        items = JSON.parse(items);
+        let amnt = 0;
+        let price = 0;
+        for (const item of items) {
+            amnt += Number(item.count);
+            price += Number(item.count) * item.prod.price;
+        }
+        setAmount(amnt);
+        setPrice(price);
     }, [])
     return( 
         <div className="header">
          <a href="/"><img src="" alt="" /></a>
-        <a href="/kosik">Košík {value}</a>
+        <a href="/kosik">Košík {amount} ({price} Kč)</a>
         <Breadcrumbs />
         </div>
     )

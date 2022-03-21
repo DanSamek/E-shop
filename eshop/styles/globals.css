@@ -5,6 +5,29 @@ p.tile-description {
     text-overflow: ellipsis !important;
     max-width: 60ch !important;
 }
+a {
+    color: #e042f5;
+}
+html {
+    background-color: #29423d;
+    color: white;
+}
+button {
+    margin: 0px 10px;
+    padding: 10px 30px;
+    padding: 5px 34px;
+    border-radius: 3px;
+    border: none;
+    background: #e042f5;
+    transition: ease-in-out .4s;
+    color: white;
+    font-size: 17px;
+}
+
+button:hover {
+    cursor: pointer;
+    background: #dd00fa;
+}
 
 .cat {
     display: grid; 
