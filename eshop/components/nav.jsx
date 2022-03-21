@@ -22,6 +22,8 @@ function Breadcrumbs(){
     if (crumbs.length < 1)
         return null;
     return( 
+        <>
+
         <nav>
             <a href="/">Home</a> {crumbs.map((e) => {
                 return (<>
@@ -29,6 +31,10 @@ function Breadcrumbs(){
                 </>)
             })}
         </nav>
+        <h1>
+            {decodeURI(path[path.length-1])}
+        </h1>
+        </>
     )
 }
 
