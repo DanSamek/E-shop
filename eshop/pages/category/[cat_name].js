@@ -7,11 +7,12 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Category() {
     const router = useRouter();
     const category = router.query.cat_name;
+    const page = Number(router.query.p) ?? 1;
     const [razeni, setRazeni] = useState("price-low-high");
     const [skladem, setSkladem] = useState(false);
     const [akcni, setAkcni] = useState(false);
     let prods = [];
-    const { data, error } = useSWR(`/api/category/${category}`, fetcher);
+    const { data, error } = useSWR(`/api/category/${category}?p=${page}`, fetcher);
     if (data) {
         prods = data.prods;
         if (razeni == "price-high-low") {
@@ -59,6 +60,8 @@ export default function Category() {
          })
      }
      </div>
+     <Link href={`/category/${category}?p=${page-1}`}><p>Prevs Page</p></Link>
+     <Link href={`/category/${category}?p=${page+1}`}><p>Next Page</p></Link>
      </>
     )
   }
