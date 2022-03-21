@@ -2,6 +2,7 @@
 import useSWR from "swr"
 import { useRouter } from 'next/router';
 import Header from "../../components/header"
+import Router from 'next/router'
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Product(){
     const addtoCart = (event) =>{
@@ -32,6 +33,8 @@ export default function Product(){
         
         localStorage.setItem("products", JSON.stringify(lc));
         alert("Přidáno do košíku");
+
+        Router.reload(window.location.pathname)
     }
     const router = useRouter();
     let product = router.query.product;

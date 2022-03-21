@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react";
 import Header from "../components/header"
+import Router from 'next/router'
 export default function kostatko(){
     let [data, getdata] = useState([]);
     let prices=0;
@@ -30,6 +31,7 @@ export default function kostatko(){
            }
         })  
         localStorage.setItem("products", JSON.stringify(arr));
+        Router.reload(window.location.pathname)
     }
 
     const changeValue = (event) =>{
@@ -47,13 +49,13 @@ export default function kostatko(){
             }
          })  
          localStorage.setItem("products", JSON.stringify(arr));
+         Router.reload(window.location.pathname)
 
     }
 
     return(
         <div>
         {Header()}
-        <h1>Košík</h1>
         {data.map((item) => item.count > 0 ?(
             <div>
             <img src={item.prod.imagename}></img>
@@ -65,13 +67,13 @@ export default function kostatko(){
             <p>Celková cena: {calculate(item.count, item.prod.price)}</p>
             <form onSubmit={removeProduct}>
                 <input type="hidden" name="product" value={item.prod.id} ></input>
-                <input type="submit"></input>
+                <input type="submit" value="Odeber produkt" ></input>
             </form>
             <form onSubmit={changeValue}>
                 <input type="number" name="number" max={item.prod.availability} min="1" ></input>
                 <input type="hidden" name="id" value={item.prod.id}></input>
                 <input type="hidden" name="item" value={item} ></input>
-                <input type="submit"></input>
+                <input type="submit" value="Změň počet produktů" ></input>
             </form>
             </div>
         ): (null))}
