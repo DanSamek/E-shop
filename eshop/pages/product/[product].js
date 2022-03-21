@@ -8,11 +8,28 @@ export default function Product(){
         event.preventDefault();
         let lc = localStorage.getItem("products") ?? "[]";
         lc = JSON.parse(lc);
-        product = {
-            "prod": JSON.parse(event.target.item.value),
-            "count": event.target.number.value,
+        let found = -1;
+        let prod = JSON.parse(event.target.item.value);
+        
+        for (const p in lc) {
+            if (lc[p].prod.id === prod.id) {
+                found = p;
+                break;
+            }
         }
-        lc.push(product)
+        if (found != -1) {
+            let amnt = lc[found].count;
+            lc[found].prod = prod,
+            lc[found].count = amnt + event.target.number.value <= prod.availability ? amnt + event.target.number.value : prod.availability;
+        } else {
+            product = {
+                "prod": prod,
+                "count": event.target.number.value <= prod.availability ? event.target.number.value : prod.availability,
+            }
+            lc.push(product)
+        }
+
+        
         localStorage.setItem("products", JSON.stringify(lc));
         alert("Přidáno do košíku");
     }
