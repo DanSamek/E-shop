@@ -5,3 +5,25 @@ p.tile-description {
     text-overflow: ellipsis !important;
     max-width: 60ch !important;
 }
+
+.cat {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 100px 100px; 
+    grid-template-areas: 
+      ". . ."
+      ". . ."
+      ". . ."; 
+}
+.pages {
+    padding-top: 90px;
+}
+.product-tile {
+    padding: 10px;
+    max-width: 150px;
+    min-height: 200px;
+    max-height: 200px;
+    display: block;
+    flex-direction: column;
+}

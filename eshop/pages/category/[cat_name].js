@@ -7,7 +7,8 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Category() {
     const router = useRouter();
     const category = router.query.cat_name;
-    const page = Number(router.query.p) ?? 1;
+    let page = Number(router.query.p) ?? 1;
+    page = page > 0 ? page : 1;
     const [razeni, setRazeni] = useState("price-low-high");
     const [skladem, setSkladem] = useState(false);
     const [akcni, setAkcni] = useState(false);
@@ -44,7 +45,7 @@ export default function Category() {
         <input type="checkbox" value={akcni} onChange={(e) => {setAkcni(e.target.checked)}} />
     </div>
 
-     <div>
+     <div className="cat">
      {
          prods.map((e) => {
              return (
@@ -60,8 +61,11 @@ export default function Category() {
          })
      }
      </div>
-     <Link href={`/category/${category}?p=${page-1}`}><p>Prevs Page</p></Link>
-     <Link href={`/category/${category}?p=${page+1}`}><p>Next Page</p></Link>
+     <div className="pages">
+        <Link href={`/category/${category}?p=${page-1}`}><button>Prevs Page</button></Link>
+        <Link href={`/category/${category}?p=${page+1}`}><button>Next Page</button></Link>
+     </div>
+
      </>
     )
   }
