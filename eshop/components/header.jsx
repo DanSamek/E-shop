@@ -5,8 +5,8 @@ import { useState } from "react";
 function Header(){
     let [ value, Getvalue ]= useState("");
     useEffect(() =>{        
-        if(!localStorage.getItem("product")){
-            localStorage.setItem("product", "0");
+        if(!localStorage.getItem("products")){
+            localStorage.setItem("products", "[]");
         }      
         Getvalue(localStorage.getItem("product"))
         console.log(value);
@@ -19,7 +19,6 @@ function Header(){
         </div>
     )
 }
-
 
 module.exports = Header;
 
