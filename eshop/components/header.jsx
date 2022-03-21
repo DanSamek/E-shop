@@ -29,7 +29,7 @@ function Header(){
     if (error) return null;
     return( 
         <div className="header">
-         <a href="/"><img src="" alt="" /></a>
+         <a href="/"><img src="/static/logo.png"  width="45px" alt="" /></a>
         <a href="/kosik"><img src="/static/kosik.png" width="45px"/> {amount} ({price} Kč)</a><br/>
         {data.map((e)=> {
             return <a href={`/category/${e}`}>{e}{" "}</a>
