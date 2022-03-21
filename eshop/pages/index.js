@@ -7,11 +7,6 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
   const { data, error } = useSWR(`/api/action`, fetcher);
-    useEffect(() => {
-      if(!localStorage.getItem("value")){
-        localStorage.setItem("value", "0");
-      }       
-    })
   if (error) {
     return <p>Error</p>
   }
