@@ -7,13 +7,15 @@ function Breadcrumbs(){
     const router = useRouter();
     const path = router.asPath.split('/');
     let crumbs = []
-    for (const i in path) {
+    for (let i in path) {
+        i = Number(i)
         if (path[i] === "")
             continue;
-        console.log(path.slice(0, i+1).join("/"), i)
         crumbs.push(<a href={path.slice(0, i+1).join("/")}>{decodeURI(path[i])}</a>)
     }
     console.log(crumbs)
+    if (crumbs.length < 1)
+        return null;
     return( 
         <nav>
             <a href="/">Home</a> {crumbs.map((e) => {
