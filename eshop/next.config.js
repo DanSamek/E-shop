@@ -10,6 +10,10 @@ const nextConfig = {
         {
           source: '/feed.xml',
           destination: '/api/feed'
+        },
+        {
+          source: '/sitemap.xml',
+          destination: '/api/sitemap'
         }
     ];
 }
