@@ -11,6 +11,11 @@ function Breadcrumbs(){
         i = Number(i)
         if (path[i] === "")
             continue;
+        if (path.length - 1 === i){
+            crumbs.push(<span>{decodeURI(path[i])}</span>)
+            continue;
+        }
+
         crumbs.push(<a href={path.slice(0, i+1).join("/")}>{decodeURI(path[i])}</a>)
     }
     console.log(crumbs)
