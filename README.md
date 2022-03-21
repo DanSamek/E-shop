@@ -1,4 +1,4 @@
-<img src="./eshop/public/logo.png" width="512" align="center" />
+<img src="./eshop/static/logo.png" width="512" align="center" />
 # E-shop
 
 cd eshop
